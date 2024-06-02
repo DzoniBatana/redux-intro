@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
 
 const initialState = {
   fullName: "",
@@ -7,7 +6,7 @@ const initialState = {
   createdAt: "",
 };
 
-const accountSlice = createSlice({
+const customerSlice = createSlice({
   name: "customer",
   initialState,
   reducers: {
@@ -21,11 +20,23 @@ const accountSlice = createSlice({
           },
         };
       },
+
+      reducer(state, action) {
+        state.fullName = state.payload.fullName;
+        state.nationalID = action.payload.nationalID;
+        state.createdAt = action.payload.createdAt;
+      },
+    },
+
+    updateName(state, action) {
+      state.fullName = action.payload;
     },
   },
 });
 
-export default accountSlice.reducer;
+export const { createCustomer, updateName } = customerSlice.actions;
+
+export default customerSlice.reducer;
 
 /*
 
